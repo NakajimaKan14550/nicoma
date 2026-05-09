@@ -85,6 +85,12 @@
             border-radius: 4px;
         }
 
+        .intro-img-container {
+            width: 100%;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
         img {
             max-width: 100%;
             height: auto;
@@ -97,12 +103,12 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(1.2);
+            transform: translate(-50%, -50%) scale(1.1);
             z-index: 2000;
             cursor: zoom-out;
             box-shadow: 0 0 100px rgba(0,0,0,0.8);
-            max-width: 90vw;
-            max-height: 90vh;
+            max-width: 95vw;
+            max-height: 95vh;
         }
 
         .overlay {
@@ -115,21 +121,6 @@
             background: rgba(0, 0, 0, 0.85);
             z-index: 1500;
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: #fff;
-        }
-
-        th, td {
-            border: 1px solid var(--border);
-            padding: 12px;
-            text-align: left;
-        }
-
-        th { background: var(--primary); color: #fff; }
 
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; text-align: center; }
@@ -149,65 +140,71 @@
 
 <header class="hero">
     <div class="hero-content">
-        <img src="nico-logo.png" alt="Nicomatic Logo" class="hero-logo">
+        <img src="logo.png" alt="Nicomatic Logo" class="hero-logo">
         <h1>Nicomatic CMMシリーズ:<br>高密度モジュール式コネクタ</h1>
-        <p>「規格に人間が合わせる」から「基板に合わせて組む」へ。宇宙・防衛・航空市場で選ばれる2mmピッチの革新的な接続ソリューション。</p>
+        <p>「規格に人間が合わせる」から「基板に合わせて組む」へ。宇宙・防衛・航空市場を席巻するカスタムインターフェースの真髄。</p>
     </div>
 </header>
+
+<section style="padding-bottom: 20px;">
+    <div class="intro-img-container">
+        <img src="nico5.png" alt="Nicomatic：会社概要とレゴブロック方式の全体像">
+    </div>
+</section>
 
 <section>
     <h2>【背景・課題】物理的制約と過酷な環境</h2>
     <div class="grid-layout">
         <div class="card">
             <h3>劇的な小型化と軽量化</h3>
-            <p>従来のD-sub(15ピン)の39.2mmに対し、19mm〜26mmまで短縮。2mmピッチの採用により、標準的な2.54mmよりも圧倒的な高密度実装を実現します。</p>
+            <p>従来のD-sub(15ピン: 39.2mm)に対し、19mm〜26mmまで短縮を実現。重量が性能を左右する航空・宇宙・ドローン等の機体において、物理的アドバンテージを提供します。</p>
             <div class="img-container">
                 <img src="nico.png" alt="CMMシリーズの小型化比較">
             </div>
         </div>
         <div class="card">
-            <h3>宇宙・航空基準の環境耐性</h3>
-            <p>耐放射線性、耐溶剤性に加え、ガス放出の少ないOxygenフリー（無酸素）構造を採用。MIL-DTL-55302等の厳しい信頼性規格に準拠しています。</p>
+            <h3>極限環境への耐性</h3>
+            <p>耐放射線性、耐溶剤性に加え、ガス放出を抑えたOxygenフリー構造を採用。20G以上の振動環境や真空環境など、地球外での運用をも想定した設計です。</p>
         </div>
     </div>
 </section>
 
 <section style="background: #fff;">
     <h2>【解決策】「レゴブロック方式」の技術原理</h2>
-    <p>特殊PPS製のハウジングを基盤に、信号・パワー・同軸の3種類のピンをパズルのように自由に混載できる「ミクスト・レイアウト」がNicomaticの真骨頂です。</p>
+    <p>特殊PPS（ポリフェニレンスルファイド）製のハウジングに、信号・パワー・同軸の各ピンを任意に配置。金型製作の手間を省きつつ、個別の設計要求に即応します。</p>
     
     <div class="grid-layout">
         <div class="card">
-            <h3>コンタクトの自由な組み合わせ</h3>
-            <p>最大35Aのパワーピンや、40GHz対応の同軸ピンを一つのハウジングに集約。これにより、本来3種類のコネクタが必要な場所を1つに統合可能です。</p>
+            <h3>ミクスト・レイアウト技術</h3>
+            <p>最大35Aの電力伝送と6GHz〜40GHzの高周波伝送を同一コネクタ内に統合。配線の合理化と信頼性の向上を同時に達成します。</p>
             <div class="img-container">
-                <img src="nico4.png" alt="コネクタ構成とレゴブロック方式">
+                <img src="nico4.png" alt="コネクタ構成とミクストレイアウト">
             </div>
         </div>
         <div class="card">
-            <h3>機内用と外部接続用の使い分け</h3>
-            <p>機内用のCMM（Micro-connector）と、EMI遮断に優れたメタルハウジング採用の機外用DMM（Micro-D）を用途に応じて使い分けます。</p>
+            <h3>機内用CMMと機外用DMM</h3>
+            <p>基板間を繋ぐパズルとしてのCMMと、電磁波ノイズ（EMI）を遮断する頑丈なメタルハウジング仕様のDMM。環境の厳しさに応じた最適解を選択可能です。</p>
             <div class="img-container">
-                <img src="nico2.png" alt="CMMとDMMの使い分け">
+                <img src="nico2.png" alt="用途に応じた使い分け">
             </div>
         </div>
     </div>
 </section>
 
 <section>
-    <h2>【産業的インパクト】運用の最適化と付加価値</h2>
+    <h2>【産業的インパクト】運用効率と付加価値の創出</h2>
     <div class="grid-layout">
         <div class="card">
-            <h3>爆速納期とカスタム供給</h3>
-            <p>標準パーツの組み合わせにより、カスタム品でありながら最短1週間という短納期を実現。特注金型を作ることなく「世界に一つだけのコネクタ」を提供します。</p>
+            <h3>爆速納期による開発加速</h3>
+            <p>中身を標準パーツの組み合わせで構成するため、特注仕様であっても最短1週間というリードタイムでの納品が可能。開発サイクルの短縮に大きく寄与します。</p>
         </div>
         <div class="card">
-            <h3>ハーネス加工サービス</h3>
-            <p>特殊な極細ケーブルのクリンプ加工（カシメ）まで一貫して請け負うことで、メーカー側の工数削減と品質保証を同時に提供し、高い付加価値を実現します。</p>
+            <h3>ハーネス加工の一元管理</h3>
+            <p>特殊な極細ケーブルのクリンプ加工までをセットで提供。検査済みハーネスとして納品することで、メーカー側の組立工数と歩留まりの課題を解消します。</p>
         </div>
         <div class="card">
-            <h3>医療現場でのタクタイル感</h3>
-            <p>Crimpflex（メンブレンスイッチ）は、医療機器に不可欠な「手袋越しでも明確なクリック感」を物理的に制御します。</p>
+            <h3>医療・産業への応用</h3>
+            <p>Crimpflexに代表されるメンブレン技術は、手袋越しでも確実な入力を可能にする「タクタイル感」を制御し、医療現場の操作安全性を支えています。</p>
         </div>
     </div>
 </section>
@@ -238,13 +235,9 @@
     images.forEach(img => {
         if (img.classList.contains('logo') || img.classList.contains('hero-logo')) return;
 
-        img.addEventListener('click', (e) => {
+        img.addEventListener('click', () => {
             img.classList.toggle('zoomed');
-            if (img.classList.contains('zoomed')) {
-                overlay.style.display = 'block';
-            } else {
-                overlay.style.display = 'none';
-            }
+            overlay.style.display = img.classList.contains('zoomed') ? 'block' : 'none';
         });
     });
 
