@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicomatic マイクロコネクタ技術解析 | クロニクス株式会社</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #091a2d;
+            --accent: #f97316;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.7;
+            color: var(--text);
+            background-color: var(--bg);
+        }
+
+        /* Navigation */
+        nav {
+            background: #fff;
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            height: 40px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary);
+            color: #fff;
+            padding: 80px 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        /* Layout */
+        section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background: #f1f5f9;
+        }
+
+        /* Image Zoom Styles */
+        .img-container {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            cursor: zoom-in;
+            transition: all 0.3s ease;
+        }
+
+        img.zoomed {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.5);
+            z-index: 2000;
+            cursor: zoom-out;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(9, 26, 45, 0.8);
+            z-index: 1500;
+        }
+
+        /* Footer already provided in prompt */
+
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="overlay" id="overlay"></div>
+
+<nav>
+    <a href="https://nakajimakan14550.github.io/home/">
+        <img src="logo.png" alt="Company Logo" class="logo">
+    </a>
+</nav>
+
+<header class="hero">
+    <div class="hero-content">
+        <img src="logo.png" alt="Brand Logo" class="hero-logo">
+        <h1>Nicomatic CMMシリーズ:<br>高密度モジュール式マイクロコネクタの技術解析</h1>
+        <p>航空宇宙・防衛分野における物理的制約を打破する、2mmピッチのカスタムインターフェースソリューション。</p>
+    </div>
+</header>
+
+<section id="background">
+    <h2>【背景・課題】過酷な環境下における物理的限界</h2>
+    <div class="grid-layout">
+        <div class="card">
+            <h3>空間・重量の制約</h3>
+            <p>従来のD-subコネクタ（15ピン：39.2mm）では、ドローンや衛星等の小型化が進む筐体内において占有面積が過大であり、重量削減の要求に応えることが困難でした。</p>
+        </div>
+        <div class="card">
+            <h3>環境耐性の欠如</h3>
+            <p>宇宙空間でのガス放出（アウトガス）や放射線、航空機内の激しい振動（20G以上）に対し、標準的な規格品では長期的な信頼性の維持に物理的限界がありました。</p>
+        </div>
+        <div class="card">
+            <h3>設計の固定化</h3>
+            <p>信号、電源、高周波を個別のコネクタで伝送する場合、基板上の実装面積が分散し、配線の複雑化と重量増加を招いていました。</p>
+        </div>
+    </div>
+</section>
+
+<section id="solution" style="background: #fff;">
+    <h2>【解決策】モジュール構造による技術的原理</h2>
+    <p>Nicomaticは「レゴブロック方式」と呼ばれるミクスト・レイアウトを採用。特殊PPS（ポリフェニレンスルファイド）製のハウジングをベースに、必要なコンタクトを任意に構成することで、これらの課題を解決します。</p>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>コンタクト種別</th>
+                    <th>役割</th>
+                    <th>主要スペック</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>信号ピン (LF)</td>
+                    <td>データ伝送</td>
+                    <td>最大5A / 2mmピッチ高密度実装</td>
+                </tr>
+                <tr>
+                    <td>パワーピン (HP)</td>
+                    <td>電源供給</td>
+                    <td>10A 〜 最大35A 対応</td>
+                </tr>
+                <tr>
+                    <td>同軸ピン (HF)</td>
+                    <td>RF信号伝送</td>
+                    <td>50Ω/75Ω, 6GHz〜40GHz(SMPM等)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="grid-layout">
+        <div class="card">
+            <h3>材料工学：特殊PPSの採用</h3>
+            <p>ガラス繊維入り高性能プラスチックを採用することで、耐放射線性、耐薬品性、吸湿ゼロを実現。宇宙環境での使用に適したOxygenフリーな特性を保持します。</p>
+        </div>
+        <div class="card">
+            <h3>機械工学：防振固定機構</h3>
+            <p>ジャックスクリュー（ステンレス製）やラッチ（ベリリウム銅製）により、激しい振動環境下でも物理的接続を保証します。</p>
+        </div>
+    </div>
+</section>
+
+<section id="impact">
+    <h2>【産業的インパクト】性能比較と市場適応</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>指標</th>
+                    <th>従来型 D-sub</th>
+                    <th>Nicomatic CMM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>サイズ(15ピン)</td>
+                    <td>39.2 mm</td>
+                    <td>19 mm 〜 26 mm</td>
+                </tr>
+                <tr>
+                    <td>ピッチ</td>
+                    <td>2.54 mm</td>
+                    <td>2.00 mm (高密度化)</td>
+                </tr>
+                <tr>
+                    <td>構成自由度</td>
+                    <td>固定規格</td>
+                    <td>ミクスト・レイアウト(信号/電力/同軸)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="grid-layout">
+        <div class="card">
+            <h3>航空宇宙・防衛</h3>
+            <p>ミサイル、人工衛星、航空機用カメラ等、1g単位の軽量化が要求される環境において、複数コネクタの統合による劇的なSWaP（Size, Weight, and Power）改善に寄与します。</p>
+        </div>
+        <div class="card">
+            <h3>産業・医療機器</h3>
+            <p>半導体製造装置の省スペース化や、医療用メンブレンスイッチ（Crimpflex）における確実なタクタイル感の提供など、信頼性が直結するインターフェースを支えます。</p>
+        </div>
+    </div>
+</section>
+
+<footer style="background: #091a2d; color: #fff; padding: 60px 20px; text-align: center;">
+    <div class="footer-info">
+        <p class="company-name" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 20px;">クロニクス株式会社</p>
+        <address class="footer-address" style="font-style: normal; line-height: 1.8; color: #cbd5e1;">
+            <p>〒160-0023 東京都新宿区西新宿3-2-11 新宿三井ビルディング二号館 904室</p>
+            <div class="contact-grid" style="display: flex; justify-content: center; gap: 20px; margin: 20px 0;">
+                <p><strong>TEL</strong> 03-5322-7191</p>
+                <p><strong>FAX</strong> 03-5322-7790</p>
+            </div>
+        </address>
+        <a href="mailto:sales@chronix.co.jp" class="btn-contact" style="display: inline-block; background: #f97316; color: white; padding: 12px 30px; border-radius: 5px; text-decoration: none; margin-top: 20px;">
+            <i class="fas fa-envelope" style="margin-right: 10px;"></i>メールでお問い合わせ
+        </a>
+        <p style="margin-top: 50px; font-size: 0.8rem; color: #64748b; letter-spacing: 0.05em;">
+            © 2026 CHRONIX
+        </p>
+    </div>
+</footer>
+
+<script>
+    // Simple Zoom Logic
+    const images = document.querySelectorAll('img');
+    const overlay = document.getElementById('overlay');
+
+    images.forEach(img => {
+        // ナビゲーションのロゴなどは除外したい場合は条件分岐を追加可能
+        if (img.classList.contains('logo') || img.classList.contains('hero-logo')) return;
+
+        img.addEventListener('click', () => {
+            img.classList.toggle('zoomed');
+            if (img.classList.contains('zoomed')) {
+                overlay.style.display = 'block';
+            } else {
+                overlay.style.display = 'none';
+            }
+        });
+    });
+
+    overlay.addEventListener('click', () => {
+        const zoomedImg = document.querySelector('img.zoomed');
+        if (zoomedImg) {
+            zoomedImg.classList.remove('zoomed');
+        }
+        overlay.style.display = 'none';
+    });
+</script>
+
+</body>
+</html>
